@@ -4,7 +4,7 @@
 ### Usage
 
 ```
-python folder-categorizer.py Downloads
+python folder-categorizer.py [Folder]
 ```
 
 
