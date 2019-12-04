@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 import os, sys
-from prettytable import PrettyTable
 import itertools
 from datetime import datetime
+from tabulate import tabulate
 
 pathDirectory = sys.argv[1]
 now = datetime.now()
@@ -24,7 +24,7 @@ folder_categories = {
 for path in Path(pathDirectory).iterdir():
     info = path.stat()
     week_ago = timestamp - week_threshold
-    filename = os.path.basename(str(path))
+    filename = os.path.basename(str(path))[:40]
     if(week_ago < info.st_mtime):
         folder_categories["recent"].append(str(filename))
         continue
@@ -39,14 +39,11 @@ for path in Path(pathDirectory).iterdir():
     folder_categories["six_months_ago"].append(str(filename))
 
 
-
-t = PrettyTable()
 titles = ['recet','week_ago', 'month_ago', 'six_months_ago']
-t.field_names = titles
 recent = folder_categories["recent"]
 week_ago = folder_categories["week_ago"]
 month_ago = folder_categories["month_ago"]
 six_months_ago = folder_categories["six_months_ago"]
-for row in reversed(list(itertools.zip_longest(recent, week_ago, month_ago, six_months_ago, fillvalue=""))):
-    t.add_row(list(row))
-print(t)
+
+
+print(tabulate(reversed(list(itertools.zip_longest(recent, week_ago, month_ago, six_months_ago, fillvalue=""))),headers=titles, tablefmt="fancy_grid", colalign=("right",)))
