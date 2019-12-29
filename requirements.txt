@@ -1,2 +1,3 @@
 PrettyTable
 tabulate
+pyinstaller
