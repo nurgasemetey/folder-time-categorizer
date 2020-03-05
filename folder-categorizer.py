@@ -46,4 +46,5 @@ month_ago = folder_categories["month_ago"]
 six_months_ago = folder_categories["six_months_ago"]
 
 
-print(tabulate(reversed(list(itertools.zip_longest(recent, week_ago, month_ago, six_months_ago, fillvalue=""))),headers=titles, tablefmt="fancy_grid", colalign=("right",)))
+print(tabulate(reversed(list(itertools.zip_longest(recent, week_ago, month_ago, six_months_ago, fillvalue=""))), \
+               headers=titles, tablefmt="fancy_grid", colalign=("right",)))
